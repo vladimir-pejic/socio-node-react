@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    h1 Edit article
+    form(method='post', action='/articles/'+article._id+'/edit')
+        .form-group
+            label Title:
+            input.form-control(name='title', type='text', value=article.title)
+        .form-group
+            label Content:
+            textarea.form-control(name='body')= article.body
+        .form-group
+            input.btn.btn-primary(type='submit', value='Submit')

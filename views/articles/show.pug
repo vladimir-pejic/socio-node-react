@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    h1= article.title
+    h5 Written by #{article.author.first_name} #{article.author.last_name}
+    p= article.body
+    if user
+        if user.id === article.author.id
+            a.btn.btn-primary(href='/articles/'+article._id+'/edit') Edit
+            a.btn.btn-danger.delete-article(href='#', data-id=article._id) Delete
+
+    h4 More from this author:
+    #{article.author.getArticles}
