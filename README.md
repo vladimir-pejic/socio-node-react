@@ -1,13 +1,20 @@
 # socio-node-react
 Experimenting by creating a CMS/Social network in Mongo/Express/React/Node stack with Socket.IO and various JS stuff.
 
+Ongoing project aimed to familiarize or improve knowledge of trending JS technologies. 
+
+DONE:
+ - Implement Node/Express MVC with MongoDB
+ - Implement Passport local strategy
+ - Implement Authentication with Sessions
+
 TODO:
- 1. Implement React instead of PUG/Jade templating
- 2. Implement Socket.IO
- 3. Implement Private conversations
- 4. Implement User profiles
- 5. Implement Posts (& Articles) CRUD + Likeable trait
- 6. Implement Friendable traits
- 5. Implement Photo albums (image uploads and organizing)
- 8. Implement Mentions and Trendings Tags
+ - Implement React instead of Pug/Jade templates
+ - Implement Socket.IO
+ - Implement Private conversations
+ - Implement User profiles
+ - Implement Posts (& Articles) CRUD + Likeable trait
+ - Implement Friendable traits
+ - Implement Photo albums (image uploads and organizing)
+ - Implement Mentions and Trendings Tags
 	
