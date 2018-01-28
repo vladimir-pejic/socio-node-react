@@ -1,6 +1,7 @@
 // React
 import React from 'react';
 import { render } from 'react-dom';
+import axios from 'react-native-axios'
 // CSS
 import styles from './scss/application.scss';
 // Import partials
@@ -11,7 +12,7 @@ class Index extends React.Component {
 
     constructor(props) {
         super(props);
-        this.itemDelete = this.itemDelete.bind(this);
+        Index.itemDelete = Index.itemDelete.bind(this);
         this.state = {
             articles: ['article 1', 'article 2', 'article 3'],
         };
@@ -29,7 +30,8 @@ class Index extends React.Component {
         return body;
     };
 
-    itemDelete(index) {
+    static itemDelete(id, index) {
+        axios.delete('articles/'+id)
         let updatedArticles = this.state.articles.filter((article, key) => {
             return index !== key;
         });
@@ -42,7 +44,7 @@ class Index extends React.Component {
 
         // Iterate articles spawning component with passed unique values + delete function
         let articles = this.state.articles.map((article, key) => {
-            return <ArticleIndex article={article} key={key} itemDelete={this.itemDelete}/>
+            return <ArticleIndex article={article} key={key} itemDelete={Index.itemDelete}/>
         });
 
         return (

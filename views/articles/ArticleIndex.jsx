@@ -4,14 +4,12 @@ export default class ArticleIndex extends React.Component {
 
     // Custom functions
     handleDelete() {
-        console.log(this);
-        this.props.itemDelete(this.props.index);
+        console.log(this.props.article._id);
+        this.props.itemDelete(this.props.article._id, this.props.index);
     }
 
     // Render the component
     render(){
-        console.log(this.props.article)
-
         return(
             <li key={this.props.index}>
                 <div className="articles-item">
