@@ -4,6 +4,17 @@ const router = express.Router();
 // Bring in Article Model
 const Article = require('../models/Article');
 
+router.get('/index', (req, res) => {
+    Article.find({}, (err, articles) => {
+        if(err) {
+            console.log(err);
+        }
+        else {
+            res.send({articles: articles})
+        }
+    });
+});
+
 // Articles routes
 router.get('/create', ensureAuthenticated, (req, res) => {
     res.render('./articles/create', {

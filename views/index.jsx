@@ -1,47 +1,58 @@
-
+// React
 import React from 'react';
 import { render } from 'react-dom';
-
-
+// CSS
 import styles from './scss/application.scss';
+// Import partials
+import ArticleIndex from './articles/ArticleIndex.jsx';
 
-class Home extends React.Component {
+
+class Index extends React.Component {
+
     constructor(props) {
         super(props);
+        this.itemDelete = this.itemDelete.bind(this);
         this.state = {
             articles: ['article 1', 'article 2', 'article 3'],
-            age: 30,
         };
-    } // Initial STATEs for ES6, instead of getInitialState()
-    render(){
-        var ager = setTimeout(function(){
-            this.setState({
-                age: 35
-            });
-        }.bind(this), 5000); // Set state to 35 after 5 seconds
+    }
+
+    componentDidMount() {
+        this.callApi()
+            .then(res => this.setState({ articles: res.articles }))
+            .catch(err => console.log(err));
+    }
+
+    async callApi() {
+        const response = await fetch('/articles/index');
+        const body = await response.json();
+        return body;
+    };
+
+    itemDelete(index) {
+        let updatedArticles = this.state.articles.filter((article, key) => {
+            return index !== key;
+        });
+        this.setState({
+            articles: updatedArticles
+        });
+    }
+
+    render() {
+
+        // Iterate articles spawning component with passed unique values + delete function
+        let articles = this.state.articles.map((article, key) => {
+            return <ArticleIndex article={article} key={key} itemDelete={this.itemDelete}/>
+        });
+
         return (
-            <div>
-                <p><strong>Name: </strong>{this.props.size.name}</p>
-                <p><strong>Length: </strong>{this.props.size.length}</p>
-                <p><strong>Girth: </strong>{this.props.size.girth}</p>
-                <p>{this.props.bog}</p>
-                <p>{this.state.age}</p>
-                <div id="articles-list">
-                    <ul>
-                        <li>{this.state.articles[0]}</li>
-                        <li>{this.state.articles[1]}</li>
-                        <li>{this.state.articles[2]}</li>
-                    </ul>
-                </div>
+            <div id="articles-index">
+                <ul>
+                    {articles}
+                </ul>
             </div>
-        );
-    } // Render the component
+        )
+    }
 }
 
-let size = {
-    name: 'Vladimir',
-    length: '20cm',
-    girth: '12,5cm',
-}; // Pass to PROPS
-
-render(<Home bog="Vladjimir je bog." size={size} />, document.getElementById('root'));
+render(<Index />, document.getElementById('root'));
