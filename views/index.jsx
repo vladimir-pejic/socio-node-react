@@ -4,7 +4,9 @@ import { render } from 'react-dom';
 import axios from 'react-native-axios'
 // CSS
 import styles from './scss/application.scss';
+import 'bootstrap/dist/css/bootstrap.css';
 // Import partials
+import Navigation from './includes/Navigation.jsx'
 import ArticleIndex from './articles/ArticleIndex.jsx';
 
 
@@ -49,9 +51,14 @@ class Index extends React.Component {
 
         return (
             <div id="articles-index">
-                <ul>
-                    {articles}
-                </ul>
+                <div>
+                    <Navigation />
+                </div>
+                <div>
+                    <ul>
+                        {articles}
+                    </ul>
+                </div>
             </div>
         )
     }
